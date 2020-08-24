@@ -27,14 +27,19 @@ class MainActivity : AppCompatActivity() {
     @ButtonCountModule.ButtonCount20 //這個ButtonCount需要的實體是由provideButtonCount20提供
     lateinit var buttonCount: ButtonCount
 
+    /**
+     *  表示這個ResultInterface的實作方式 會透過hilt依賴注入
+     */
+    @Inject
+    lateinit var printer: ResultInterface
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.button.setOnClickListener {
-            buttonCount.count++
-            binding.textView.text = "${buttonCount.count}"
+            printer.showResult("切嚕")
         }
     }
 }
