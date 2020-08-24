@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
      * 表示這個buttonCount 將會被hilt給依賴注入
      */
     @Inject
+    @ButtonCountModule.ButtonCount20 //這個ButtonCount需要的實體是由provideButtonCount20提供
     lateinit var buttonCount: ButtonCount
 
     override fun onCreate(savedInstanceState: Bundle?) {
