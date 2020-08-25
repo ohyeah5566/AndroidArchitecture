@@ -29,8 +29,12 @@ class MainActivity : AppCompatActivity() {
 
     /**
      *  表示這個ResultInterface的實作方式 會透過hilt依賴注入
+     *
+     *  @SnackbarResultModule.SnackbarResult
+     *  選擇用snackbar的方式 顯示result
      */
     @Inject
+    @SnackbarResultModule.SnackbarResult
     lateinit var printer: ResultInterface
 
     override fun onCreate(savedInstanceState: Bundle?) {

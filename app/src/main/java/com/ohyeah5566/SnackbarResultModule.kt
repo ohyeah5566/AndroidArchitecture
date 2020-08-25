@@ -1,7 +1,10 @@
 package com.ohyeah5566
 
+import android.app.Activity
 import android.content.Context
+import android.view.View
 import android.widget.Toast
+import com.google.android.material.snackbar.Snackbar
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -12,17 +15,17 @@ import javax.inject.Qualifier
 
 @InstallIn(ActivityComponent::class)
 @Module
-abstract class ToastResultModule {
+abstract class SnackbarResultModule {
     @Qualifier
-    annotation class ToastResult
+    annotation class SnackbarResult
 
     /**
      *  @Binds 告知Hilt用哪種方法實現ResultInterface
      *  @param implToast 傳入要實作ResultInterface的class,這邊用Toast實做 所以傳入ToastResultImpl
      */
     @Binds
-    @ToastResult
-    abstract fun bindPrintInterface(implToast: ToastResultImpl): ResultInterface
+    @SnackbarResult
+    abstract fun bindPrintInterface(implToast: SnackbarResultImpl): ResultInterface
 
     /**
      * 實作ResultInterface
@@ -31,10 +34,11 @@ abstract class ToastResultModule {
      * constructor 用hilt提供的context , showResult時 只需要傳入text即可
      * //private val context: ActivityContext 不知道為什麼這個不行QQ
      */
-    class ToastResultImpl @Inject constructor(@ActivityContext private val context: Context) :
+    class SnackbarResultImpl @Inject constructor(@ActivityContext private val context: Context) :
         ResultInterface {
         override fun showResult(text: String) {
-            Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+            val view = (context as Activity).window.decorView.findViewById<View>(android.R.id.content)
+            Snackbar.make(view, text, Snackbar.LENGTH_SHORT).show()
         }
     }
 }
