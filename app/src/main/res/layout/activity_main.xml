@@ -12,18 +12,54 @@
         android:layout_height="wrap_content"
         android:text="0"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/addOneButton"
+        app:layout_constraintRight_toRightOf="@+id/addOneButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/addOneButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="add 1"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/resultButton"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="snackBar"
+        app:layout_constraintBottom_toBottomOf="@+id/resultSwitch"
+        app:layout_constraintEnd_toStartOf="@+id/resultSwitch"
+        app:layout_constraintTop_toTopOf="@+id/resultSwitch" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/resultSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/resultButton"
+        app:layout_constraintRight_toRightOf="@+id/resultButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Toast"
+        app:layout_constraintBottom_toBottomOf="@+id/resultSwitch"
+        app:layout_constraintStart_toEndOf="@+id/resultSwitch"
+        app:layout_constraintTop_toTopOf="@+id/resultSwitch" />
+
+    <Button
+        android:id="@+id/resultButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="切嚕"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/addOneButton"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

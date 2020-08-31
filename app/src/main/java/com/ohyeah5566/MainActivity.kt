@@ -35,6 +35,15 @@ class MainActivity : AppCompatActivity() {
      */
     @Inject
     @SnackbarResultModule.SnackbarResult
+    lateinit var snackbarPrinter: ResultInterface
+
+    @Inject
+    @ToastResultModule.ToastResult
+    lateinit var toastPrinter: ResultInterface
+
+    //一個預設值顯示方式為snackBar的printer 用switch作切換
+    @Inject
+    @SnackbarResultModule.SnackbarResult
     lateinit var printer: ResultInterface
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,8 +51,16 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.button.setOnClickListener {
+        binding.resultButton.setOnClickListener {
             printer.showResult("切嚕")
         }
+        binding.addOneButton.setOnClickListener {
+            binding.textView.text = "${buttonCount.count}"
+            buttonCount.count++
+        }
+        binding.resultSwitch.setOnCheckedChangeListener { _, b ->
+            printer = if (b) toastPrinter else snackbarPrinter
+        }
+
     }
 }

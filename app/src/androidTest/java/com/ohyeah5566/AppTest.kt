@@ -16,6 +16,7 @@
 
 package com.ohyeah5566
 
+import android.view.View
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
@@ -27,6 +28,10 @@ import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import androidx.test.espresso.matcher.RootMatchers.withDecorView
+import org.hamcrest.Matchers.`is`
+import org.hamcrest.Matchers.not
+
 
 //@HiltAndroidTest管理每一個Hilt components的生命週期,和執行injection
 @HiltAndroidTest
@@ -43,9 +48,39 @@ class AppTest {
         ActivityScenario.launch(MainActivity::class.java)
 
         // Tap on Button
-        onView(withId(R.id.button)).perform(click())
+        onView(withId(R.id.resultButton)).perform(click())
 
         onView(withId(com.google.android.material.R.id.snackbar_text))
             .check(matches(withText("切嚕")))
+    }
+
+
+    //點switch 切換到toast顯示模式 再按顯示的button 判斷toast有沒有跳出
+    @Test
+    fun switchPrinterToToast() {
+        lateinit var decorView: View
+        ActivityScenario.launch(MainActivity::class.java).onActivity {
+            decorView = it.window.decorView
+        }
+
+        onView(withId(R.id.resultSwitch)).perform(click())
+        onView(withId(R.id.resultButton)).perform(click())
+        onView(withText("切嚕")).inRoot(withDecorView(not(`is`(decorView))))
+            .check(matches(isDisplayed()))
+
+        //inRoot 要找的元件不在layout上 像是toast 或是 autoComplete,
+        //TODO withDecorView(not(`is`(decorView)))
+    }
+
+
+    //點了按鈕後 看textView最後是不是顯示22
+    @Test
+    fun testAddOneButton() {
+        ActivityScenario.launch(MainActivity::class.java)
+        // Tap on Button
+        onView(withId(R.id.addOneButton)).perform(click()) //20
+        onView(withId(R.id.addOneButton)).perform(click()) //21
+        onView(withId(R.id.addOneButton)).perform(click()) //22
+        onView(withId(R.id.textView)).check(matches(withText("22")))
     }
 }
