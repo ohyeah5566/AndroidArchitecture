@@ -33,8 +33,19 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.3.1'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // 加了這個才可以讓
+    // @RunWith(AndroidJUnit4::class), InstrumentationRegistry.getInstrumentation().targetContext
+    // 正常運作
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+
+    // espresso
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // 提供更多的View的Actions
+    // 像是RecyclerViewActions,DrawerActions,NavigationViewActions,PickerActions,ViewPagerActions
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.3.0'
 
 }
