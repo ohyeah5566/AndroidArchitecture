@@ -10,8 +10,4 @@ class CICITestCase {
         Assert.assertEquals(123,123)
     }
 
-    @Test
-    fun firstWrongTest(){
-        Assert.assertEquals(123,122)
-    }
 }
