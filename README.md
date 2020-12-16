@@ -1,28 +1,45 @@
 
+jenkins
 
-寫一些有關Android新技術
-===
-> 由於沒有新技術一看就懂的天份
-總是得實際敲一次才能體會箇中奧妙
-但如果每次學新技術都要開新專案...覺得麻煩 
-所以創了一個project 專門拿來學新技術用
-會把一些麻煩的配置設定放在master 有新的技術要學就從master切一個branch出來就可以直接開始 
+一開始的建立jenkins環境 都是靠這篇
+https://medium.com/evan-android-note/jenkins-bb11f371bcb6
 
->未來會新增複雜一點的頁面 和 操作
-因為有些新東西 如果在只有一個activity或按鈕搭配textView這種簡單的操作
-學起來是通常不會遇到什麼問題
-不過常常把這新技術套用在複雜一點的專案上的話
-像是mvvm 或 mvp 把邏輯,資料,view 單純的分開沒什麼大問題
-但如果牽扯到recyclerView的adapter 或是 onActivityResult該怎麼處理?
-就有點頭痛了
-所以未來會有一個branch有著複雜點的操作 對新技術有初步了解之後 就可以試著套用在複雜的操作上
+不過第一次build就失敗了XDDD
+一開始是github專案和branch的沒設定好
+要在專案的source code management
+設定 URL = https://github.com/ohyeah5566/AndroidArchitecture.git (.git要加
+branch是 new/cicd 或是any
+
+後來
+遇到的是了gradle 6.1.1需要JAVA 8才能的問題
+一開始以為是android studio的java XD
+之後還是built失敗才 發現是要到Global Tool Configuration設定jenkins的JDK
+總之就安裝JDK到電腦上 再設定JAVA_HOME就解決了
+
+有plugin可以只打oracle的帳號密碼 就讓jenkins自己安裝jdk
+不過懶申請帳號所以就算了
+
+後來第一次成功built專案
+
+因為第一篇教學是讓專案十分鐘自己built一次
+比較理想的是git push一次就built一次
+
+這邊要修改專案的configure 在Build Triggers
+要改選Github hook trigger for GITScm polling
+然後到github的頁面 修改webHooks
+不過這時候的jenkins都是建立在localhost的狀態下
+所以github的webHooks不能設定 localhost
+這時候要透過ngrok 讓localhost可以對應一個public的地址
+可以參考以下這篇
+https://zoejoyuliao.medium.com/%E9%80%8F%E9%81%8E-github-webhook-%E8%A7%B8%E7%99%BC%E6%9C%AC%E5%9C%B0-jenkins-pipeline-%E8%AE%93%E4%BD%A0-push-code-%E5%88%B0-github-%E5%B0%B1%E6%9C%83%E8%87%AA%E5%8B%95%E8%B7%91-ci-cd-7c4bd7a22446
+設定之後的url 會長這樣
+https://d7b0ce13953a.ngrok.io/github-webhook/
+
+這樣下push指令時 jenkins就會幫你built專案了
 
 
-學新技術主要會使用new/ 當作branch name 的開頭
----
-這時候 有些小東西就比較不會去講究 
-會以了解新技術為主 新東西會附上大量的註解
-讓未來的自己如果忘了的話 可以再回來馬上複習 也不用重頭了解一遍
+
+
 
 
 
