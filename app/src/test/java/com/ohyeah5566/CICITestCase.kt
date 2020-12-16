@@ -11,9 +11,4 @@ class CICITestCase {
         Assert.assertEquals(123,123)
     }
 
-    @Test
-    fun firstErrorTest(){
-        Assert.assertEquals(123,122)
-    }
-
 }
