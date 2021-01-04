@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
 import com.ohyeah5566.databinding.ActivityMainBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -19,7 +21,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity() {
     companion object {
         const val HOST_NAME = "https://www.amiiboapi.com/api/"
     }
@@ -31,6 +33,7 @@ class MainActivity : AppCompatActivity(){
         binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        // init spinner
         ArrayAdapter.createFromResource(
             this,
             R.array.search_type,
@@ -55,12 +58,18 @@ class MainActivity : AppCompatActivity(){
             }
 
         initService()
+        binding.amiiboRecyclerView.addItemDecoration(
+            DividerItemDecoration(
+                this,
+                DividerItemDecoration.VERTICAL
+            )
+        )
 
         binding.searchButton.setOnClickListener {
             lifecycleScope.launch(Dispatchers.Main) {
                 val result = service.getAmiiboList(binding.searchEditText.text.toString())
                 val amiiboList = result.amiibo
-                Log.d("MainActivity", amiiboList[0].character)
+                binding.amiiboRecyclerView.adapter = AmiiboAdapter(amiiboList)
             }
         }
     }

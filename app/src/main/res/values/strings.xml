@@ -3,10 +3,14 @@
 
     <string-array name="search_type">
         <item name="character">角色名稱</item>
-        <item name="gameSeries">遊戲</item>
+        <item name="gameSeries">遊戲系列</item>
         <item name="name">amiibo名稱</item>
     </string-array>
 
     <string name="search">搜尋</string>
     <string name="search_hint">搜尋內容</string>
+
+    <string name="character">角色名字：%1$s</string>
+    <string name="name">amiibo名稱：%1$s</string>
+    <string name="gameSeries">遊戲系列：%1$s</string>
 </resources>
