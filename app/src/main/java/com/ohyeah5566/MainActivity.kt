@@ -2,19 +2,15 @@ package com.ohyeah5566
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.RecyclerView
 import com.ohyeah5566.databinding.ActivityMainBinding
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -65,12 +61,15 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
-        binding.searchButton.setOnClickListener {
-            lifecycleScope.launch(Dispatchers.Main) {
-                val result = service.getAmiiboList(binding.searchEditText.text.toString())
-                val amiiboList = result.amiibo
-                binding.amiiboRecyclerView.adapter = AmiiboAdapter(amiiboList)
+        binding.searchEditText.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                lifecycleScope.launch(Dispatchers.Main) {
+                    val result = service.getAmiiboList(binding.searchEditText.text.toString())
+                    val amiiboList = result.amiibo
+                    binding.amiiboRecyclerView.adapter = AmiiboAdapter(amiiboList)
+                }
             }
+            true
         }
     }
 
