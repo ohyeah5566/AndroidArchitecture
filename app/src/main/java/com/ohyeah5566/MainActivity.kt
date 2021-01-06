@@ -1,8 +1,8 @@
 package com.ohyeah5566
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
@@ -24,6 +24,10 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
     lateinit var service: AmiiboService
+    var amiiboAdapter = AmiiboAdapter(listOf()) { url ->
+        val dialog = ImageViewerDialog(url)
+        dialog.show(supportFragmentManager, null)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -54,6 +58,7 @@ class MainActivity : AppCompatActivity() {
             }
 
         initService()
+        binding.amiiboRecyclerView.adapter = amiiboAdapter
         binding.amiiboRecyclerView.addItemDecoration(
             DividerItemDecoration(
                 this,
@@ -65,8 +70,7 @@ class MainActivity : AppCompatActivity() {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 lifecycleScope.launch(Dispatchers.Main) {
                     val result = service.getAmiiboList(binding.searchEditText.text.toString())
-                    val amiiboList = result.amiibo
-                    binding.amiiboRecyclerView.adapter = AmiiboAdapter(amiiboList)
+                    amiiboAdapter.updateList(result.amiibo)
                 }
             }
             true

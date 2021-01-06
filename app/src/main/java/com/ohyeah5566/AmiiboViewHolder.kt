@@ -8,11 +8,15 @@ import com.ohyeah5566.databinding.ItemViewAmiiboBinding
 
 class AmiiboViewHolder(private val binding: ItemViewAmiiboBinding) :
     RecyclerView.ViewHolder(binding.root) {
-    fun bind(amiibo: Amiibo) {
+    fun bind(amiibo: Amiibo, imageClick: (url: String) -> Unit) {
         val context = binding.root.context
         Glide.with(context)
             .load(amiibo.image)
             .into(binding.image)
+
+        binding.image.setOnClickListener {
+            imageClick.invoke(amiibo.image)
+        }
 
         binding.nameTextView.text = context.getString(R.string.name, amiibo.name)
         binding.charTextView.text = context.getString(R.string.character, amiibo.character)
