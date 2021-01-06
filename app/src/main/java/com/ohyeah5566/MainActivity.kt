@@ -1,6 +1,5 @@
 package com.ohyeah5566
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -12,18 +11,10 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.ohyeah5566.databinding.ActivityMainBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 
 class MainActivity : AppCompatActivity() {
-    companion object {
-        const val HOST_NAME = "https://www.amiiboapi.com/api/"
-    }
 
     lateinit var binding: ActivityMainBinding
-    lateinit var service: AmiiboService
     var amiiboAdapter = AmiiboAdapter(listOf()) { url ->
         val dialog = ImageViewerDialog(url)
         dialog.show(supportFragmentManager, null)
@@ -57,7 +48,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-        initService()
         binding.amiiboRecyclerView.adapter = amiiboAdapter
         binding.amiiboRecyclerView.addItemDecoration(
             DividerItemDecoration(
@@ -69,29 +59,13 @@ class MainActivity : AppCompatActivity() {
         binding.searchEditText.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 lifecycleScope.launch(Dispatchers.Main) {
-                    val result = service.getAmiiboList(binding.searchEditText.text.toString())
+                    val result =
+                        getAmiiboService().getAmiiboList(binding.searchEditText.text.toString())
                     amiiboAdapter.updateList(result.amiibo)
                 }
             }
             true
         }
-    }
-
-    private fun initService() {
-        val logging = HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BASIC
-        }
-
-        val client = OkHttpClient.Builder()
-            .addInterceptor(logging)
-            .build()
-
-        service = Retrofit.Builder()
-            .client(client)
-            .baseUrl(HOST_NAME)
-            .addConverterFactory(MoshiConverterFactory.create())
-            .build()
-            .create(AmiiboService::class.java)
     }
 
 
