@@ -6,11 +6,9 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.ohyeah5566.databinding.ActivityMainBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,6 +16,9 @@ class MainActivity : AppCompatActivity() {
     var amiiboAdapter = AmiiboAdapter(listOf()) { url ->
         val dialog = ImageViewerDialog(url)
         dialog.show(supportFragmentManager, null)
+    }
+    val viewModel by lazy {
+        AmiiboViewModel(AmiiboRepository(getAmiiboService())) //TODO viewModuleFactory, hilt inject
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,15 +59,13 @@ class MainActivity : AppCompatActivity() {
 
         binding.searchEditText.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                lifecycleScope.launch(Dispatchers.Main) {
-                    val result =
-                        getAmiiboService().getAmiiboList(binding.searchEditText.text.toString())
-                    amiiboAdapter.updateList(result.amiibo)
-                }
+                viewModel.searchAmiibo(binding.searchEditText.text.toString())
             }
             true
         }
+
+        viewModel.amiiboLists.observe(this, Observer { list ->
+            amiiboAdapter.updateList(list)
+        })
     }
-
-
 }
