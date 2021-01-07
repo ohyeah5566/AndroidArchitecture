@@ -7,6 +7,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.ohyeah5566.databinding.ActivityMainBinding
 
@@ -17,8 +18,15 @@ class MainActivity : AppCompatActivity() {
         val dialog = ImageViewerDialog(url)
         dialog.show(supportFragmentManager, null)
     }
-    val viewModel by lazy {
-        AmiiboViewModel(AmiiboRepository(getAmiiboService())) //TODO viewModuleFactory, hilt inject
+    private val viewModel by lazy {
+        ViewModelProvider(
+            this,
+            AmiiboViewModelFactory(AmiiboRepository(getAmiiboService()))
+        )[AmiiboViewModel::class.java]
+        //用直接new的方式產生的 ViewModel 會沒辦法知道lifecycle的變化
+        //所以用ViewModelProvider的方式將Activity or Fragment的lifecycle丟進去 讓viewModel可以隨著lifecycle做處理
+        //關於viewModel的介紹 https://developer.android.com/topic/libraries/architecture/viewmodel
+        //TODO  hilt inject
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
