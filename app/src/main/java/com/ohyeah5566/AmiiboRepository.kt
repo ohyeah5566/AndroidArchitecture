@@ -1,7 +1,13 @@
 package com.ohyeah5566
 
+import javax.inject.Inject
 
-class AmiiboRepository(private val service: AmiiboService) {
+/**
+ *  改用Inject的方式取得amiiboService
+ */
+class AmiiboRepository @Inject constructor(
+    private val service: AmiiboService
+) {
 
     suspend fun getAmiiboList(name: String): List<Amiibo> {
         try {
