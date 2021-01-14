@@ -6,6 +6,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -19,17 +20,8 @@ class MainActivity : AppCompatActivity() {
         val dialog = ImageViewerDialog(url)
         dialog.show(supportFragmentManager, null)
     }
-//    private val viewModel by lazy {
-//        ViewModelProvider(
-//            this,
-//            AmiiboViewModelFactory(AmiiboRepository(getAmiiboService()))
-//        )[AmiiboViewModel::class.java]
-//        //用直接new的方式產生的 ViewModel 會沒辦法知道lifecycle的變化
-//        //所以用ViewModelProvider的方式將Activity or Fragment的lifecycle丟進去 讓viewModel可以隨著lifecycle做處理
-//        //關於viewModel的介紹 https://developer.android.com/topic/libraries/architecture/viewmodel
-//    }
 
-    val amiiboViewModel : AmiiboViewModel by viewModels()  //變成只要一個by viewModels()...太神啦
+    val amiiboViewModel: AmiiboViewModel by viewModels()  //變成只要一個by viewModels()...太神啦
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -76,6 +68,18 @@ class MainActivity : AppCompatActivity() {
 
         amiiboViewModel.amiiboLists.observe(this, Observer { list ->
             amiiboAdapter.updateList(list)
+        })
+
+        amiiboViewModel.errorMessage.observe(this, Observer { event ->
+            event.getContentIfNotHandled()?.let { errorMsg ->
+                Toast.makeText(this, errorMsg, Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        amiiboViewModel.networkErrorEvent.observe(this, Observer { event ->
+            event?.getContentIfNotHandled()?.let { errorMessage ->
+                Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+            }
         })
     }
 }

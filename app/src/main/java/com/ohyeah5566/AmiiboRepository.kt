@@ -8,15 +8,7 @@ import javax.inject.Inject
 class AmiiboRepository @Inject constructor(
     private val service: AmiiboService
 ) {
-
-    suspend fun getAmiiboList(name: String): List<Amiibo> {
-        try {
-            val result = service.getAmiiboList(name)
-            return result.amiibo
-        } catch (ex: Throwable) {
-            //TODO
-        }
-
-        return emptyList()
+    suspend fun getAmiiboList(name: String): ResultWrapper<AmiiboResponse> {
+        return safeApiCall { service.getAmiiboList(name) }   //TODO 為什麼safeApiCall的參數位置對調 就沒辦法這樣寫
     }
 }

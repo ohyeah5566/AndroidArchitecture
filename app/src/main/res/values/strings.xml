@@ -13,4 +13,5 @@
     <string name="character">角色名字：%1$s</string>
     <string name="name">amiibo名稱：%1$s</string>
     <string name="gameSeries">遊戲系列：%1$s</string>
+    <string name="net_work_error_msg">請檢查網路狀態</string>
 </resources>
