@@ -15,8 +15,7 @@ class AmiiboViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     private val _amiiboLists = MutableLiveData<List<Amiibo>>()
-    val amiiboLists: LiveData<List<Amiibo>>
-        get() = _amiiboLists
+    val amiiboLists: LiveData<List<Amiibo>> = _amiiboLists
 
     //這兩個一次性的資料，要用Event包起來，避免畫面重建時，再次觸發
     private val _errorMessage = MutableLiveData<Event<String>>()

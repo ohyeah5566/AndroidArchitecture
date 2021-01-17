@@ -1,50 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="100dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="w, 1:1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <!--   func parameter  -->
+        <!--   因為不想用interface或其他方式   -->
+        <!--   &lt; 是"<" 不過 xml中部允許<所以用&lt;表示 -->
+        <import type="kotlin.jvm.functions.Function1" />
+        <import type="kotlin.Unit" />
+        <variable
+            name="imageClickEvent"
+            type="Function1&lt;String, Unit>" />
 
-    <TextView
-        android:id="@+id/nameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintStart_toEndOf="@+id/image"
-        app:layout_constraintBottom_toTopOf="@+id/charTextView"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="name：Isabella" />
+        <variable
+            name="amiibo"
+            type="com.ohyeah5566.Amiibo" />
+    </data>
 
-    <TextView
-        android:id="@+id/charTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/gsTextView"
-        app:layout_constraintStart_toEndOf="@+id/image"
-        app:layout_constraintTop_toBottomOf="@+id/nameTextView"
-        tools:text="char：Isabella" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
 
-    <TextView
-        android:id="@+id/gsTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/image"
-        app:layout_constraintTop_toBottomOf="@+id/charTextView"
-        tools:text="gameSeries：Animal Crossing" />
+        <!--    onClick 觸發func parameter    -->
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:onClick="@{view -> imageClickEvent.invoke(amiibo.image)}"
+            app:imageUrl="@{amiibo.image}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="w, 1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!--    string resource中有%1$s的使用    -->
+        <TextView
+            android:id="@+id/nameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:text="@{String.format(@string/name,amiibo.name)}"
+            app:layout_constraintBottom_toTopOf="@+id/charTextView"
+            app:layout_constraintStart_toEndOf="@+id/image"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="name：Isabella" />
+
+        <TextView
+            android:id="@+id/charTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@{String.format(@string/character,amiibo.character)}"
+            app:layout_constraintBottom_toTopOf="@+id/gsTextView"
+            app:layout_constraintStart_toEndOf="@+id/image"
+            app:layout_constraintTop_toBottomOf="@+id/nameTextView"
+            tools:text="char：Isabella" />
+
+        <TextView
+            android:id="@+id/gsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@{String.format(@string/gameSeries,amiibo.gameSeries)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/image"
+            app:layout_constraintTop_toBottomOf="@+id/charTextView"
+            tools:text="gameSeries：Animal Crossing" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

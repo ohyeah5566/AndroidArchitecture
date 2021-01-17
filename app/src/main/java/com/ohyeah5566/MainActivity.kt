@@ -8,6 +8,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.ohyeah5566.databinding.ActivityMainBinding
@@ -15,7 +16,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMainBinding
     var amiiboAdapter = AmiiboAdapter(listOf()) { url ->
         val dialog = ImageViewerDialog(url)
         dialog.show(supportFragmentManager, null)
@@ -24,9 +24,13 @@ class MainActivity : AppCompatActivity() {
     val amiiboViewModel: AmiiboViewModel by viewModels()  //變成只要一個by viewModels()...太神啦
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+        val binding : ActivityMainBinding =
+            DataBindingUtil.setContentView(this,R.layout.activity_main)
+        binding.viewmodel = amiiboViewModel
+        binding.amiiboAdapter = amiiboAdapter
+        binding.lifecycleOwner = this  //如果有綁定跟viewModel liveData有關的需要設定lifecycleOwner
+
         // init spinner
         ArrayAdapter.createFromResource(
             this,
@@ -51,7 +55,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-        binding.amiiboRecyclerView.adapter = amiiboAdapter
         binding.amiiboRecyclerView.addItemDecoration(
             DividerItemDecoration(
                 this,
@@ -65,10 +68,6 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-
-        amiiboViewModel.amiiboLists.observe(this, Observer { list ->
-            amiiboAdapter.updateList(list)
-        })
 
         amiiboViewModel.errorMessage.observe(this, Observer { event ->
             event.getContentIfNotHandled()?.let { errorMsg ->
