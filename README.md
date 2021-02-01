@@ -1,28 +1,16 @@
 
-
-寫一些有關Android新技術
+Nintendo amiibo search
 ===
-> 由於沒有新技術一看就懂的天份
-總是得實際敲一次才能體會箇中奧妙
-但如果每次學新技術都要開新專案...覺得麻煩 
-所以創了一個project 專門拿來學新技術用
-會把一些麻煩的配置設定放在master 有新的技術要學就從master切一個branch出來就可以直接開始 
 
->未來會新增複雜一點的頁面 和 操作
-因為有些新東西 如果在只有一個activity或按鈕搭配textView這種簡單的操作
-學起來是通常不會遇到什麼問題
-不過常常把這新技術套用在複雜一點的專案上的話
-像是mvvm 或 mvp 把邏輯,資料,view 單純的分開沒什麼大問題
-但如果牽扯到recyclerView的adapter 或是 onActivityResult該怎麼處理?
-就有點頭痛了
-所以未來會有一個branch有著複雜點的操作 對新技術有初步了解之後 就可以試著套用在複雜的操作上
+利用MVVM+Retrofit+coroutine+Hilt
+整合以上套件做的一個小玩具
 
+一個輸入框 加上 開放的API https://amiiboapi.com/
+可以去查詢任天堂的amiibo
+將結果用recyclerView顯示 點了圖示可以放大
 
-學新技術主要會使用new/ 當作branch name 的開頭
----
-這時候 有些小東西就比較不會去講究 
-會以了解新技術為主 新東西會附上大量的註解
-讓未來的自己如果忘了的話 可以再回來馬上複習 也不用重頭了解一遍
+![image](animal_crossing.gif)
 
-
+目前只能搜尋遊戲系列 而且只能用英文搜尋
+其他的角色名稱 amiibo名稱 雖然有出現在spinner 不過還沒實作
 
