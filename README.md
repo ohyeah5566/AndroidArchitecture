@@ -10,7 +10,7 @@ Hilt 是個基於dagger架構上開發的DI(dependency injection)套件，
 以及inject,provide 和 同類型的物件該如何利用Qualifier正確的給值
 會將自己的解釋 寫在code旁邊當註解
 
-![image](20210201_175507.gif)
+<img src="20210201_175507.gif" width="138" height="245"/>
 
 功能非常簡單
 點了按鈕會有兩種顯示方式 Toast,snackBar
