@@ -23,6 +23,7 @@ class Presenter(
     }
 
     override fun cleanUp() {
+        println("presenter cleanUp")
         view = null
     }
 

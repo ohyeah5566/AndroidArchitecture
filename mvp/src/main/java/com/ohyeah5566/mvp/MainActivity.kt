@@ -6,22 +6,27 @@ import com.ohyeah5566.mvp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), Contract.View {
     lateinit var binding: ActivityMainBinding
+    lateinit var presenter : Contract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val presenter: Contract.Presenter = Presenter(this)
+        presenter = Presenter(this)
 
         binding.processAB.setOnClickListener {
             presenter.processA()
             presenter.processB()
         }
         binding.finishActivity.setOnClickListener {
-            presenter.cleanUp()
             finish()
         }
+    }
+
+    override fun onDestroy() {
+        presenter.cleanUp()
+        super.onDestroy()
     }
 
 
