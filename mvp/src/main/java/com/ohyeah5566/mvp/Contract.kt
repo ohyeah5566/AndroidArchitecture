@@ -9,5 +9,6 @@ interface Contract {
     interface Presenter{
         fun processA()
         fun processB()
+        fun cleanUp()
     }
 }

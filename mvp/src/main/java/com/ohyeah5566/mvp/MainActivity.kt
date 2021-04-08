@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity(), Contract.View {
             presenter.processB()
         }
         binding.finishActivity.setOnClickListener {
+            presenter.cleanUp()
             finish()
         }
     }
@@ -31,9 +32,7 @@ class MainActivity : AppCompatActivity(), Contract.View {
     }
 
     override fun Bfinish() {
-        runOnUiThread {
-            val dialog = MyDialog(this)
-            dialog.show()
-        }
+        val dialog = MyDialog(this)
+        dialog.show()
     }
 }

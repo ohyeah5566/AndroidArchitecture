@@ -4,21 +4,27 @@ import android.os.Handler
 import android.os.Looper
 
 class Presenter(
-    private var view: Contract.View
+    private var view: Contract.View?
 ) : Contract.Presenter {
 
     override fun processA() {
         Thread {
             Thread.sleep(5000)
-            view.Afinish()
+            view?.Afinish()
         }.start()
     }
 
     override fun processB() {
-        Handler().postDelayed(
-            { view.Bfinish() },
+        Handler(Looper.getMainLooper()).postDelayed({
+                view?.Bfinish()
+            },
             10000
         )
     }
+
+    override fun cleanUp() {
+        view = null
+    }
+
 
 }
