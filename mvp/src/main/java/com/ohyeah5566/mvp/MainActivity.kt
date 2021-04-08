@@ -6,15 +6,14 @@ import com.ohyeah5566.mvp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), Contract.View {
     lateinit var binding: ActivityMainBinding
-    lateinit var presenter : Contract.Presenter
+    lateinit var presenter: Contract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        presenter = Presenter(this)
-
+        presenter = Presenter(this, lifecycle)
         binding.processAB.setOnClickListener {
             presenter.processA()
             presenter.processB()
@@ -24,10 +23,12 @@ class MainActivity : AppCompatActivity(), Contract.View {
         }
     }
 
-    override fun onDestroy() {
-        presenter.cleanUp()
-        super.onDestroy()
-    }
+//    目前只有一個presenter要處理 所以會覺得沒什麼
+//    但之後如果有很多東西要在destroy處理 就會變得很雜亂
+//    override fun onDestroy() {
+//        presenter.cleanUp()
+//        super.onDestroy()
+//    }
 
 
     override fun Afinish() {
