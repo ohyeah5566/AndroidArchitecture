@@ -1,3 +1,2 @@
-include ':mvp'
 include ':app'
 rootProject.name = "AndroidArchitecture"
