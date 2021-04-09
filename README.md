@@ -30,3 +30,27 @@ fun cleanUp() {
     view = null
 }
 ```
+
+
+
+lifecycle主要由Lifecycle, LifecycleOwner, LifecycleObserver 這三個組成
+== 
+https://developer.android.com/topic/libraries/architecture/lifecycle
+
+Lifecycle
+=
+保存紀錄生命週期當前的狀態
+提供addObserver的方法 讓其他物件可以新增觀察生命週期的改變
+
+LifecycleOwner
+=
+只需要實作 ```getLifecycle()```
+AppCompatActivity本身繼承的ComponentActivity 就有幫你實作這功能了
+
+LifecycleObserver
+=
+就是一個觀察者 透過 addObserver 
+觀察目標的生命週期 
+用annotation的方式 ```@OnLifecycleEvent```
+就可以讓function 在指定的生命狀態觸發時執行
+
