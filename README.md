@@ -1,28 +1,32 @@
 
 
-寫一些有關Android新技術
+在MVP架構中 使用lifecycle
 ===
-> 由於沒有新技術一看就懂的天份
-總是得實際敲一次才能體會箇中奧妙
-但如果每次學新技術都要開新專案...覺得麻煩 
-所以創了一個project 專門拿來學新技術用
-會把一些麻煩的配置設定放在master 有新的技術要學就從master切一個branch出來就可以直接開始 
+在一些異步耗時的情況下
+使用者可能會沒耐心的把app關閉
 
->未來會新增複雜一點的頁面 和 操作
-因為有些新東西 如果在只有一個activity或按鈕搭配textView這種簡單的操作
-學起來是通常不會遇到什麼問題
-不過常常把這新技術套用在複雜一點的專案上的話
-像是mvvm 或 mvp 把邏輯,資料,view 單純的分開沒什麼大問題
-但如果牽扯到recyclerView的adapter 或是 onActivityResult該怎麼處理?
-就有點頭痛了
-所以未來會有一個branch有著複雜點的操作 對新技術有初步了解之後 就可以試著套用在複雜的操作上
+那如果App沒特別做處理，在異步耗時完成後後面有跟view做互動
+輕則在其他地方 突然跳出Toast
+重則可能會產生crash (如果是show dialog的話
 
+所以需要一個方法讓presenter知道view 已經被destroyed了
+最簡單就是在Activity的onDestroy call presenter做清理的動作
+但如果要在onDestroy做清理的數量變多 就會變得不好維護
 
-學新技術主要會使用new/ 當作branch name 的開頭
----
-這時候 有些小東西就比較不會去講究 
-會以了解新技術為主 新東西會附上大量的註解
-讓未來的自己如果忘了的話 可以再回來馬上複習 也不用重頭了解一遍
+所以就有了lifecycle產生
+透過addObserver 和 annotation的方式
+可以讓需要特別針對生命週期做處理的物件 專注在要做的事情上
 
-
-
+```Kotlin
+class Presenter : LifecycleObserver //implement LifecycleObserver 
+//加入觀察者
+fun observeLifecycle(lifecycle:Lifecycle){
+    lifecycle.addObserver(this)
+}
+//在觀察的view的狀態是ON_DESTROY 執行下面的function
+@OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+fun cleanUp() {
+    println("presenter cleanUp")
+    view = null
+}
+```
