@@ -7,7 +7,7 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 
 class Presenter(
-    private var view: Contract.View?,
+    var view: Contract.View?,
     private val lifecycle: Lifecycle
 ) : Contract.Presenter, LifecycleObserver {
 
