@@ -15,10 +15,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel.meme.observe(this, {
+            binding.recyclerView.adapter = PostAdapter(it)
             it.forEach { post ->
                 Log.d("MainActivity", "title:${post.title}")
             }
-
         })
 
         viewModel.loadPost("memes")
