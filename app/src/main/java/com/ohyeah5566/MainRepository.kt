@@ -8,4 +8,12 @@ class MainRepository(
     suspend fun getPosts(subReddit: String): List<Post> {
         return service.getPost(subReddit).memes
     }
+
+    suspend fun upsLessThen(post: Post) {
+
+    }
+
+    suspend fun upsMoreTen(post: Post) {
+
+    }
 }
