@@ -18,14 +18,16 @@
 使用方法
 
 在project目錄下 建立一個_buildSrc_ 資料夾 名稱一定要是buildSrc
-![image](images/p1.png)
-在buildSrc下 建立build.gradle.kts檔案 內容一樣
-[build.gradle.kts](buildSrc/build.gradle.kts) 
+![image](images/p1_1.png)
+
+
+在buildSrc下 建立[build.gradle.kts](buildSrc/build.gradle.kts) 檔案 內容一樣
+
 
 這邊可以先跑一下 gradle sync
 
-在buildSrc/src/main/java 下建立Dependencies.kt 或是其他自訂的名稱
-[Dependencies](buildSrc/src/main/java/Dependencies.kt)
+在buildSrc/src/main/java 下建立[Dependencies.kt](buildSrc/src/main/java/Dependencies.kt) 或是其他自訂的名稱
+
 最後的檔案結構會如下
 ![image](images/p3.png)
 
