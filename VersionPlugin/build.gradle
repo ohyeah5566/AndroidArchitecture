@@ -1,0 +1,28 @@
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.72"
+    }
+}
+
+apply plugin: 'kotlin'
+apply plugin: 'java-gradle-plugin'
+
+
+repositories {
+    mavenCentral()
+}
+
+gradlePlugin {
+    plugins {
+        version {
+            // 在 gradle(app)需要通過 id 引用
+            id = 'com.ohyeah5566.versionplugin'
+            // class路徑
+            implementationClass = 'com.ohyeah5566.versionplugin.VersionPlugin'
+        }
+    }
+}
