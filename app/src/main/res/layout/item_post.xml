@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@android:color/white"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
 
     <ImageView
         android:id="@+id/subRedditIcon"
@@ -20,11 +20,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/favorite"
         app:layout_constraintStart_toEndOf="@+id/subRedditIcon"
         app:layout_constraintTop_toTopOf="@+id/subRedditIcon"
         tools:text="r/memes" />
-
 
     <TextView
         android:id="@+id/userName"
@@ -32,10 +31,19 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/subRedditIcon"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/favorite"
         app:layout_constraintStart_toEndOf="@+id/subRedditIcon"
         tools:text="Posted by u/me" />
 
+    <ImageView
+        android:id="@+id/favorite"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginRight="10dp"
+        android:padding="5dp"
+        android:src="@drawable/favorite_border_black_24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/subRedditIcon" />
 
     <TextView
         android:id="@+id/title"

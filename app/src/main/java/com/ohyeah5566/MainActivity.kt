@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.ohyeah5566.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    val viewModel by viewModels<MainViewModel> { MainViewModelFactory() }
+    val viewModel by viewModels<MainViewModel> { MainViewModelFactory(this) }
 
     lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,7 +15,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel.meme.observe(this, {
-            binding.recyclerView.adapter = PostAdapter(it)
+            val adapter = PostAdapter(it)
+            binding.recyclerView.adapter = adapter
+            adapter.favoriteClickEvent = { post ->
+                viewModel.postFavoriteClick(post)
+            }
             it.forEach { post ->
                 Log.d("MainActivity", "title:${post.title}")
             }
