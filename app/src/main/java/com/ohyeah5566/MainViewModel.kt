@@ -11,19 +11,19 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(
     val repository: MainRepository,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val dispatcher: CoroutineDispatcher = Dispatchers.Main
 ) : ViewModel() {
     private val _memes = MutableLiveData<List<Post>>()
     val meme: LiveData<List<Post>> = _memes
 
     fun loadPost(subReddit: String) {
-        viewModelScope.launch(ioDispatcher) {
+        viewModelScope.launch(dispatcher) {
             _memes.value = repository.getPosts(subReddit)
         }
     }
 
     fun postFavoriteClick(post: Post) {
-        viewModelScope.launch(ioDispatcher) {
+        viewModelScope.launch(dispatcher) {
             if (post.favorite) {
                 repository.saveLikedPost(post)
             } else {

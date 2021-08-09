@@ -8,7 +8,6 @@ import coil.size.Scale
 import coil.transform.CircleCropTransformation
 import com.ohyeah5566.databinding.ItemPostBinding
 import com.ohyeah5566.model.Post
-import kotlinx.android.synthetic.main.item_post.view.*
 
 class PostAdapter(val list: List<Post>) : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
 
@@ -30,9 +29,9 @@ class PostAdapter(val list: List<Post>) : RecyclerView.Adapter<PostAdapter.ViewH
 
     override fun getItemCount() = list.size
 
-    inner class ViewHolder(itemView: ItemPostBinding) : RecyclerView.ViewHolder(itemView.root) {
+    inner class ViewHolder(private val binding: ItemPostBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(post: Post) {
-            with(itemView) {
+            with(binding) {
                 subRedditName.text = "r/${post.subreddit}"
                 userName.text = "Posted by u/${post.author}"
                 title.text = post.title
