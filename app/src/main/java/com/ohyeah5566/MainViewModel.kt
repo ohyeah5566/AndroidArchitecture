@@ -18,7 +18,11 @@ class MainViewModel(
 
     fun loadPost(subReddit: String) {
         viewModelScope.launch(dispatcher) {
-            _memes.value = repository.getPosts(subReddit)
+            _memes.value = if (subReddit == "liked") {
+                repository.getLikedPosts()
+            } else {
+                repository.getPosts(subReddit)
+            }
         }
     }
 

@@ -11,6 +11,10 @@ class MainRepository(
         return service.getPost(subReddit).memes
     }
 
+    suspend fun getLikedPosts(): List<Post>{
+        return db.getAll()
+    }
+
     suspend fun saveLikedPost(post: Post) {
         db.addPost(post)
     }

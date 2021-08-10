@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val subRedditList = listOf("memes", "aww", "oddlysatisfying", "Hololive") //, "liked"
+        val subRedditList = listOf("memes", "aww", "oddlysatisfying", "Hololive", "liked")
         binding.pager.adapter = object : FragmentStateAdapter(this) {
 
             override fun getItemCount() = subRedditList.size
