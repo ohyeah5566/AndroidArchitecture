@@ -24,10 +24,10 @@ object Versions{
     const val coil = "1.3.1"
 
     //Test
-    const val junit = "4.12"
+    const val junit = "4.13.2"
     const val androidx_junit = "1.1.3"
     const val espresso_core = "3.4.0"
-    const val mockk = "1.9.3"
+    const val mockk = "1.12.0"
     const val core_testing = "2.1.0"
 
 }

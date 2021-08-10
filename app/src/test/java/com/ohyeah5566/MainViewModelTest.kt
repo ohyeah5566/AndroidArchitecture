@@ -38,4 +38,16 @@ class MainViewModelTest {
         viewModel.postFavoriteClick(post)
         coVerify { repository.deleteLikedPost(post) }
     }
+
+    @Test
+    fun testGetPost(){
+        val repository = mockk<MainRepository>(relaxed = true)
+        val viewModel = MainViewModel(repository, testDispatcher)
+
+        viewModel.loadPost("sub")
+        coVerify { repository.getPosts("sub") }
+
+        viewModel.loadPost("liked")
+        coVerify { repository.getLikedPosts() }
+    }
 }
