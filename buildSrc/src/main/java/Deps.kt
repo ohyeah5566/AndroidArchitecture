@@ -8,6 +8,8 @@ object Versions{
     const val appcompat = "1.3.1"
     const val constrantlayout = "2.1.0"
     const val recycler_view = "1.0.0"
+    const val viewpager = "1.0.0"
+    const val material = "1.4.0"
 
     const val retrofit = "2.9.0"
     const val logging_interceptor = "4.9.0"
@@ -33,6 +35,7 @@ object Versions{
 object Deps {
     const val android_gradle = "com.android.tools.build:gradle:${Versions.android_gradle}"
     const val kotlin_gradle_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin_version}"
+    const val kotlin_reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin_version}"
 
     const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin_version}"
     const val core_ktx = "androidx.core:core-ktx:${Versions.core_ktx}"
@@ -42,6 +45,8 @@ object Deps {
     const val constraintlayout = "androidx.constraintlayout:constraintlayout:${Versions.constrantlayout}"
 
     const val recycler_view = "androidx.recyclerview:recyclerview:${Versions.recycler_view}"
+    const val viewpager = "androidx.viewpager2:viewpager2:${Versions.viewpager}"
+    const val material = "com.google.android.material:material:${Versions.material}"
 
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     const val moshi_converter = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
