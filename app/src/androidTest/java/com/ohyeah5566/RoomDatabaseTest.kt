@@ -7,6 +7,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.ohyeah5566.db.PostDao
 import com.ohyeah5566.db.PostDatabase
 import com.ohyeah5566.model.Post
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
@@ -52,10 +53,10 @@ class RoomDatabaseTest {
         )
 
         postDao.addPost(post)
-        var posts = postDao.getAll()
+        var posts = postDao.getAll().first()
         assert(posts[0].title == "title")
         postDao.deletePost(post)
-        posts = postDao.getAll()
+        posts = postDao.getAll().first()
         assert(posts.isEmpty())
     }
 }

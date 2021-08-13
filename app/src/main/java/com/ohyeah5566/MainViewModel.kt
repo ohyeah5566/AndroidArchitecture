@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.ohyeah5566.model.Post
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class MainViewModel(
@@ -18,10 +19,14 @@ class MainViewModel(
 
     fun loadPost(subReddit: String) {
         viewModelScope.launch(dispatcher) {
-            _memes.value = if (subReddit == "liked") {
-                repository.getLikedPosts()
+            if (subReddit == "liked") {
+                repository.getLikedPosts().collect {
+                    _memes.value = it
+                }
             } else {
-                repository.getPosts(subReddit)
+                repository.getPosts(subReddit).collect {
+                    _memes.value = it
+                }
             }
         }
     }
