@@ -3,8 +3,10 @@ package com.ohyeah5566.data
 import com.ohyeah5566.api.PostService
 import com.ohyeah5566.db.PostDao
 import kotlinx.coroutines.flow.*
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class MainRepository(
+class MainRepository @Inject constructor(
     val service: PostService,
     val db: PostDao
 ) {

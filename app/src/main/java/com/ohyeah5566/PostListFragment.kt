@@ -9,9 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.ohyeah5566.adapters.PostAdapter
 import com.ohyeah5566.databinding.FragmentPostListBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PostListFragment : Fragment() {
-    val viewModel by viewModels<MainViewModel> { MainViewModelFactory(requireContext()) }
+//    val viewModel by viewModels<MainViewModel> { MainViewModelFactory(requireContext()) }
+    private val viewModel: MainViewModel by viewModels()
 
     lateinit var binding: FragmentPostListBinding
 

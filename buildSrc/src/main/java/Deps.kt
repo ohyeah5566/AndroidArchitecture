@@ -23,6 +23,8 @@ object Versions{
 
     const val coil = "1.3.1"
 
+    const val hilt = "2.38.1"
+
     //Test
     const val junit = "4.13.2"
     const val androidx_junit = "1.1.3"
@@ -68,11 +70,16 @@ object Deps {
 
     const val coil = "io.coil-kt:coil:${Versions.coil}"
 
+    const val hilt_plugin = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}"
+    const val hilt_android = "com.google.dagger:hilt-android:${Versions.hilt}"
+    const val hilt_compiler = "com.google.dagger:hilt-compiler:${Versions.hilt}"
+
     //test
     const val junit = "junit:junit:${Versions.junit}"
     const val androidx_junit ="androidx.test.ext:junit:${Versions.androidx_junit}"
     const val espresso_core = "androidx.test.espresso:espresso-core:${Versions.espresso_core}"
     const val mockk = "io.mockk:mockk:${Versions.mockk}"
+    const val mockk_jvm = "io.mockk:mockk-agent-jvm:${Versions.core_testing}"
     const val core_testing = "androidx.arch.core:core-testing:${Versions.core_testing}"
 }
 

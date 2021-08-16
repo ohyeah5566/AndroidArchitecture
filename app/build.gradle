@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion 30
@@ -70,6 +71,8 @@ dependencies {
     implementation Deps.lifecycle_viewmodel
     implementation Deps.lifecycle_livedata
 
+    implementation Deps.hilt_android
+    kapt Deps.hilt_compiler
 
     implementation Deps.coil
 
