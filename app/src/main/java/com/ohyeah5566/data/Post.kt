@@ -1,4 +1,4 @@
-package com.ohyeah5566.model
+package com.ohyeah5566.data
 
 import androidx.annotation.DrawableRes
 import androidx.room.Entity

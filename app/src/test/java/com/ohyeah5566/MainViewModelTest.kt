@@ -1,7 +1,8 @@
 package com.ohyeah5566
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.ohyeah5566.model.Post
+import com.ohyeah5566.data.MainRepository
+import com.ohyeah5566.data.Post
 import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi

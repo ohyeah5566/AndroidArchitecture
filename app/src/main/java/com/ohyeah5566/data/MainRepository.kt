@@ -1,8 +1,7 @@
-package com.ohyeah5566
+package com.ohyeah5566.data
 
+import com.ohyeah5566.api.PostService
 import com.ohyeah5566.db.PostDao
-import com.ohyeah5566.model.Post
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 
 class MainRepository(

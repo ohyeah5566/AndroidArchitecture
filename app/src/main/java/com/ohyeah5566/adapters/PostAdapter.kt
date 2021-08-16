@@ -1,4 +1,4 @@
-package com.ohyeah5566
+package com.ohyeah5566.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,8 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.size.Scale
 import coil.transform.CircleCropTransformation
+import com.ohyeah5566.R
 import com.ohyeah5566.databinding.ItemPostBinding
-import com.ohyeah5566.model.Post
+import com.ohyeah5566.data.Post
 
 class PostAdapter(val list: List<Post>) : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
 

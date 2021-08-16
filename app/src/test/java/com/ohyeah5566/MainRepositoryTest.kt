@@ -1,7 +1,9 @@
 package com.ohyeah5566
 
+import com.ohyeah5566.api.PostService
+import com.ohyeah5566.data.MainRepository
 import com.ohyeah5566.db.PostDao
-import com.ohyeah5566.model.Post
+import com.ohyeah5566.data.Post
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.flow.first

@@ -1,7 +1,7 @@
 package com.ohyeah5566.db
 
 import androidx.room.*
-import com.ohyeah5566.model.Post
+import com.ohyeah5566.data.Post
 import kotlinx.coroutines.flow.Flow
 
 @Dao

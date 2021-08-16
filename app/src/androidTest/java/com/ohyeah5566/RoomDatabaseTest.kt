@@ -6,7 +6,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.ohyeah5566.db.PostDao
 import com.ohyeah5566.db.PostDatabase
-import com.ohyeah5566.model.Post
+import com.ohyeah5566.data.Post
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.After
